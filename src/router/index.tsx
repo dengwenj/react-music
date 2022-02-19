@@ -8,7 +8,7 @@ import type { RouteObject } from 'react-router-dom'
 
 import Discover from 'pages/discover'
 import Mine from 'pages/mine'
-import Firend from 'pages/friend'
+import Friend from 'pages/friend'
 import NotFount from 'pages/not-found'
 
 export default function RoutesConfig() {
@@ -28,8 +28,8 @@ export default function RoutesConfig() {
       element: <Mine />
     },
     {
-      path: '/firend',
-      element: <Firend />
+      path: '/friend',
+      element: <Friend />
     },
     {
       path: '*', // 找不到

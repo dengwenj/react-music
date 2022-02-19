@@ -10,12 +10,12 @@ export default memo(function App() {
   
   return (
     <>
-      <WJAppHeather />
       <Router>
-        {/* 映射路由 是写的组件 */}
-        <RoutesConfig />
+        <WJAppHeather />
+          {/* 映射路由 是写的组件 */}
+          <RoutesConfig />
+        <WJAppFooter />
       </Router>
-      <WJAppFooter />
     </>
   )
 })
