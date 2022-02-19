@@ -1,8 +1,7 @@
-import React from 'react'
+import React, { memo } from 'react'
 
-export default function App() {
+export default memo(() => {
   return (
     <div>App</div>
   )
-}
-
+})
