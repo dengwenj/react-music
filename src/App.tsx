@@ -1,9 +1,21 @@
 import React, { memo } from 'react'
+import { HashRouter as Router } from 'react-router-dom'
 
-export default memo(() => {
+import RoutesConfig from 'router'
+
+import WJAppHeather from 'components/AppHeader'
+import WJAppFooter from 'components/AppFooter'
+
+export default memo(function App() {
+  
   return (
     <>
-      <h2>dddd</h2> 
+      <WJAppHeather />
+      <Router>
+        {/* 映射路由 是写的组件 */}
+        <RoutesConfig />
+      </Router>
+      <WJAppFooter />
     </>
   )
 })
