@@ -1,13 +1,19 @@
 import React, { memo } from 'react'
 import { Link } from 'react-router-dom' 
 
+import { HeaderWrapper, HeaderLeft, HeaderRight } from './styled'
+
 const WJAppHeather = memo(() => {
   return (
-    <>
-      <Link to={'/'}>发现音乐</Link>
-      <Link to={'/mine'}>我的音乐</Link>
-      <Link to={'/friend'}>朋友</Link>
-    </>
+    <HeaderWrapper>
+      <div className='content wrap-v1'>
+        <HeaderLeft>
+          <Link to={'/'} className='logo sprite_01' />
+        </HeaderLeft>
+        <HeaderRight>right</HeaderRight>
+      </div>
+      <div className='divider'></div>
+    </HeaderWrapper>
   )
 })
 
