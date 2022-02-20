@@ -50,6 +50,7 @@ export const HeaderLeft = styled.div`
       text-decoration: none; // 不要下划线
       :hover {
         color: #fff;
+        background-color: #000000;
       }
       :last-child {
         i {
@@ -68,5 +69,41 @@ export const HeaderLeft = styled.div`
 `
 
 export const HeaderRight = styled.div`
-
+  display: flex;
+  align-items: center;
+  .input {
+    width: 160px;
+    padding: 3px;
+    border-radius: 50px;
+    .ant-input-prefix {
+      padding-left: 4px;
+      color: #717171;
+    }
+    .ant-input {
+      font-size: 12px;
+    }
+  }
+  .creator {
+    margin-left: 10px;
+    width: 120px;
+    height: 30px;
+    border-radius: 30px;
+    color: #cbcbcb;
+    border: 1px solid #4f4f4f;
+    background-color: #232424;
+    cursor: pointer;
+    :hover {
+      border: 1px solid #fff;
+      color: #fff;
+    }
+  }
+  .login {
+    margin-left: 10px;
+    color: #ccc;
+    font-size: 14px;
+    :hover {
+      cursor: pointer;
+      color: #fff;
+    }
+  }
 `
