@@ -18,6 +18,7 @@ export const HeaderWrapper = styled.div`
 export const HeaderLeft = styled.div`
   display: flex;
   .logo {
+    text-indent: -99999px;
     display: block;
     width: 176px;
     height: 69px;

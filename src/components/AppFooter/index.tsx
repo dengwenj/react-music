@@ -7,9 +7,7 @@ export default memo(function WJAppFooter() {
   const showFooterLinks = () => {
     return footerLinks.map((item, index) => {
       let i = <i></i>
-      if (index === footerLinks.length - 1) {
-        i = <></> 
-      }
+      if (index === footerLinks.length - 1) i = <></> 
       return <a href={item.link} key={item.title}>{item.title}{i}</a>
     })
   }
@@ -48,6 +46,5 @@ export default memo(function WJAppFooter() {
         </FooterRight>
       </div>
     </AppFooterWrapper>
-    
   )
 })

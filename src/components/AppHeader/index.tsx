@@ -25,7 +25,8 @@ const WJAppHeather = memo(() => {
     <HeaderWrapper>
       <div className='content wrap-v1'>
         <HeaderLeft>
-          <Link to={'/'} className='logo sprite_01' />
+          {/* 故意显示这个文本 有助于 seo 即搜索引擎优化。但是又不想显示这个文本，设置个样式  text-indent: -99999px; 就移到屏幕外面去了，看不到了，像京东 考拉 等都是这么做的*/}
+          <Link to={'/'} className='logo sprite_01'>网易云音乐</Link>
           <div className='show-header-links'>
             {showHeaderLinks()}
           </div>
