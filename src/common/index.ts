@@ -1,5 +1,7 @@
-import { headerLinks } from './local-data'
+import { headerLinks, footerLinks, footerImages } from './local-data'
 
 export {
-  headerLinks
+  headerLinks,
+  footerLinks,
+  footerImages
 }

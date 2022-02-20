@@ -1,4 +1,4 @@
 export interface IHeaderLinks {
-  title: string,
+  title?: string,
   link: string
 }
