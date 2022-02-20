@@ -3,8 +3,20 @@ import { NavLink, Outlet } from 'react-router-dom'
 
 import { dicoverMenu } from 'common' 
 import { DiscoverWrapper, TopMenu } from './styled'
+import request from 'services'
+
+import type { IBannersAPI } from 'services/types'
 
 export default function Discover() {
+  // /banner
+  const res = request<IBannersAPI>({
+    method: 'GET',
+    url: '/banner'
+  })
+  res.then((res) => {
+
+  })
+
   const showDicoverMenu = () => {
     return (
       <ul className='content'>
