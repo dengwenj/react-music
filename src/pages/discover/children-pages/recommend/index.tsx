@@ -16,7 +16,7 @@ export default function Recommend() {
    */
   const { banners } = useSelector<ICombineReducers, IUseSelectorReturn>((state) => {
     return { banners: state.recommend.topBanners }
-  }, shallowEqual) // shallowEqual 会对 对象里面的属性进行浅比较，没有变就不会重新渲染，性能优化。不加的话，组件依赖了这个数据每次都会重新渲染
+  }, shallowEqual) // shallowEqual 比较的是依赖的数据发生变化没有， shallowEqual 会对 对象里面的属性进行浅比较，没有变就不会重新渲染，性能优化。不加的话，组件依赖了这个数据每次都会重新渲染
 
   // 发送网络请求
   useEffect(() => {
@@ -27,3 +27,9 @@ export default function Recommend() {
     <div>{banners?.length}</div>
   )
 }
+
+/**
+ * 浅比较概念：浅比较也称引用相等，在js中===是做浅比较，只检查左右两边是否是同一个对象的引用；
+ * {如果不同的变量名指向同一个对象，那么它们都是这个对象的引用，也就是说指向同一个内存地址。 
+ * 修改其中一个变量，会影响到其他所有变量。 这种引用只局限于对象，如果两个变量指向同一个原始类型的值。 那么，变量这时都是值的拷贝。
+ */
