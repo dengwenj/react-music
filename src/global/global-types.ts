@@ -1,4 +1,5 @@
-export interface IAction {
+type Common = Record<string, any>
+
+export type IAction = {
   type: string
-  data?: unknown
-}
+} & Common

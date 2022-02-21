@@ -3,5 +3,5 @@ interface ICommon {
 }
 
 export interface IBannersAPI extends ICommon {
-  banners: any[]
+  banners: any[] | null
 }
