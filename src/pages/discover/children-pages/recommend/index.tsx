@@ -16,7 +16,7 @@ export default function Recommend() {
    */
   const { banners } = useSelector<ICombineReducers, IUseSelectorReturn>((state) => {
     return { banners: state.recommend.topBanners }
-  }, shallowEqual) // shallowEqual 会对 对象里面的属性进行浅比较，没有变就不会重新渲染。性能优化
+  }, shallowEqual) // shallowEqual 会对 对象里面的属性进行浅比较，没有变就不会重新渲染，性能优化。不加的话，组件依赖了这个数据每次都会重新渲染
 
   // 发送网络请求
   useEffect(() => {
