@@ -1,14 +1,29 @@
+// 库
 import React from 'react'
 
+// 组件
 import TopBanner from './components/top-banner'
+import HotRecommend from './components/hot-recommend'
+import { RecommendWrapper, RecommendRight, RecommendLeft, Content } from './styled' 
+
 // 推荐模块
 export default function Recommend() {
 
 
   return (
-    <>
+    <RecommendWrapper>
+      {/* 轮播图 */}
       <TopBanner />
-    </>
+      {/* 内容 */}
+      <Content className='wrap-v2'>
+        <RecommendLeft>
+          <HotRecommend />
+        </RecommendLeft>
+        <RecommendRight>
+          2
+        </RecommendRight>
+      </Content>
+    </RecommendWrapper>
   )
 }
 
