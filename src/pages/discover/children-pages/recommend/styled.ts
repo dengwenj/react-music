@@ -1,12 +1,12 @@
 import styled from "styled-components"
 
 export const RecommendWrapper = styled.div`
-
 `
 
 export const Content = styled.div`
   display: flex;
   border-left: 1px solid #ccc;
+  background-color: #ffffff;
 `
 
 export const RecommendLeft = styled.div`

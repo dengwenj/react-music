@@ -1,6 +1,5 @@
 // 库
 import React from 'react'
-
 // 组件
 import TopBanner from './components/top-banner'
 import HotRecommend from './components/hot-recommend'
@@ -8,7 +7,6 @@ import { RecommendWrapper, RecommendRight, RecommendLeft, Content } from './styl
 
 // 推荐模块
 export default function Recommend() {
-
 
   return (
     <RecommendWrapper>
