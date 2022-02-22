@@ -3,6 +3,8 @@ import React from 'react'
 // 组件
 import TopBanner from './components/top-banner'
 import HotRecommend from './components/hot-recommend'
+import NewAlbum from './components/new-album'
+import RecommendRanking from './components/recommend-ranking'
 import { RecommendWrapper, RecommendRight, RecommendLeft, Content } from './styled' 
 
 // 推荐模块
@@ -16,6 +18,8 @@ export default function Recommend() {
       <Content className='wrap-v2'>
         <RecommendLeft>
           <HotRecommend />
+          <NewAlbum />
+          <RecommendRanking />
         </RecommendLeft>
         <RecommendRight>
           2

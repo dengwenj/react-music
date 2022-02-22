@@ -12,7 +12,7 @@ import { LeftOutlined, RightOutlined } from '@ant-design/icons'
 
 // 类型
 import type { ICombineReducers } from 'store/types'
-import type { IUseSelectorReturn } from '../../types'
+import type { IUseSelectorBannersReturn } from '../../types'
 import type { CarouselRef } from 'antd/lib/carousel'
 
 export default function TopBanner() {
@@ -23,7 +23,7 @@ export default function TopBanner() {
    * 第一个泛型是参数，第二个泛型是返回值 。state这个参数是返回的全部的 state 就是 combineReducers 参数里面传的对象
    * return 的值就是 useSelect 的返回值
    */
-  const { banners } = useSelector<ICombineReducers, IUseSelectorReturn>((state) => {
+  const { banners } = useSelector<ICombineReducers, IUseSelectorBannersReturn>((state) => {
     return { banners: state.recommend.topBanners }
   }, shallowEqual) // shallowEqual 比较的是依赖的数据发生变化没有， shallowEqual 会对 对象里面的属性进行浅比较，没有变就不会重新渲染，性能优化。不加的话，组件依赖了这个数据每次都会重新渲染
 

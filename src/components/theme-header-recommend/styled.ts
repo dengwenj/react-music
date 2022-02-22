@@ -16,6 +16,8 @@ export const ThemeHeaderRecommendLift = styled.div`
     margin-left: 35px;
     margin-right: 20px;
     font-size: 20px;
+    font-weight: 400;
+    color: #333333;
   }
   .keywords-item {
     span {
