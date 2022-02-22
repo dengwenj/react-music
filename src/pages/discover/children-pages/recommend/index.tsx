@@ -24,7 +24,7 @@ export default function Recommend() {
   }, [dispatch])
 
   return (
-    <div>{banners?.length}</div>
+    <>{banners?.length}</>
   )
 }
 

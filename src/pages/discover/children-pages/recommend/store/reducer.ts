@@ -1,4 +1,4 @@
-import { TOP_BANNERS } from './constants'
+import { RecommendActionType } from './constants'
 
 import type { ITopBannersState } from '../types'
 import type { IAction } from 'store/types'
@@ -12,7 +12,7 @@ const initState: ITopBannersState = {
 export default function reducer(state: ITopBannersState = initState, action: IAction<IBannersAPI>) {
   const { type, data } = action
   switch (type) {
-    case TOP_BANNERS:
+    case RecommendActionType.TOP_BANNERS:
       return { ...state, topBanners: data.banners }
     default:
       return state
