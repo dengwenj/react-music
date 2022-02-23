@@ -3,5 +3,6 @@
 // 可以用枚举
 export enum RecommendActionType {
   TOP_BANNERS = 'TOP_BANNERS',
-  HOT_RECOMMEND = 'HOT_RECOMMEND'
+  HOT_RECOMMEND = 'HOT_RECOMMEND',
+  NEW_ALBUM = 'NEW_ALBUM'
 }

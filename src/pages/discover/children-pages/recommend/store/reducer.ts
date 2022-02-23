@@ -6,7 +6,8 @@ import type { IAction } from 'store/types'
 // 初始值 返回的要是这个类型
 const initState: IRecommendState = {
   topBanners: [],
-  hotRecommends: []
+  hotRecommends: [],
+  newAlbums: []
 }
 
 export default function reducer(state: IRecommendState = initState, action: IAction<any>) {
@@ -16,6 +17,8 @@ export default function reducer(state: IRecommendState = initState, action: IAct
       return { ...state, topBanners: data.banners }
     case RecommendActionType.HOT_RECOMMEND:
       return { ...state, hotRecommends: data.result }
+    case RecommendActionType.NEW_ALBUM:
+      return { ...state, newAlbums: data.albums }
     default:
       return state
   }

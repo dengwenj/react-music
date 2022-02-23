@@ -11,3 +11,8 @@ export interface IHotRecommendsAPI extends ICommon {
   hasTaste: boolean
   result: any[]
 }
+
+export interface INewAlbumAPI extends ICommon {
+  total: number
+  albums: any[]
+}
