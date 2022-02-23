@@ -20,9 +20,6 @@ export default function NewAlbum() {
   const dispatch = useDispatch()
   // splice 会修改数组， slice 不会修改原数组
   const allArr = [newAlbums?.slice(0, 5), newAlbums?.slice(5, 10)]
-  console.log(allArr);
-  
-  
 
   useEffect(() => {
     dispatch(getNewAlbumAction(10))

@@ -16,3 +16,7 @@ export interface INewAlbumAPI extends ICommon {
   total: number
   albums: any[]
 }
+
+export interface ITopListAPI extends ICommon {
+  playlist: Record<string, any>
+}

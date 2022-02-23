@@ -7,7 +7,10 @@ import type { IAction } from 'store/types'
 const initState: IRecommendState = {
   topBanners: [],
   hotRecommends: [],
-  newAlbums: []
+  newAlbums: [],
+  upRanking: {},
+  newRanking: {},
+  originRanking: {}
 }
 
 export default function reducer(state: IRecommendState = initState, action: IAction<any>) {
@@ -19,6 +22,12 @@ export default function reducer(state: IRecommendState = initState, action: IAct
       return { ...state, hotRecommends: data.result }
     case RecommendActionType.NEW_ALBUM:
       return { ...state, newAlbums: data.albums }
+    case RecommendActionType.UP_RANKING:
+      return { ...state, upRanking: data.playlist }
+    case RecommendActionType.NEW_RANKING:
+      return { ...state, newRanking: data.playlist }
+    case RecommendActionType.ORIGIN_RANKING:
+      return { ...state, originRanking: data.playlist }
     default:
       return state
   }

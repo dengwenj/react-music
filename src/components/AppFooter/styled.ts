@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const AppFooterWrapper = styled.div`
   border-top: 1px solid #ccc;
+  padding-bottom: 40px;
   .content {
     display: flex;
   }

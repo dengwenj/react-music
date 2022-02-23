@@ -1,6 +1,11 @@
 import request from "services"
 
-import type { IBannersAPI, IHotRecommendsAPI, INewAlbumAPI } from "services/types"
+import type {
+  IBannersAPI,
+  IHotRecommendsAPI,
+  INewAlbumAPI,
+  ITopListAPI
+} from "services/types"
 
 // 轮播图数据
 export const getTopBanners = () => {
@@ -26,6 +31,17 @@ export const getNewAlbums = (limit: number) => {
     url: '/top/album',
     params: {
       limit
+    }
+  })
+}
+
+// 榜单
+export const getTopList = (idx: number) => {
+  return request<ITopListAPI>({
+    method: 'GET',
+    url: '/top/list',
+    params: {
+      idx
     }
   })
 }

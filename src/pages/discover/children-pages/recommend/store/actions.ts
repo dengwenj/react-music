@@ -1,9 +1,14 @@
-import { getHotRecommends, getNewAlbums, getTopBanners } from 'services/api/recommend'
+import {
+  getHotRecommends,
+  getNewAlbums,
+  getTopBanners,
+  getTopList
+} from 'services/api/recommend'
 
 import { RecommendActionType } from './constants'
 
 import type { Dispatch } from 'redux'
-import type { IBannersAPI, IHotRecommendsAPI, INewAlbumAPI } from 'services/types'
+import type { IBannersAPI, IHotRecommendsAPI, INewAlbumAPI, ITopListAPI } from 'services/types'
 
 const topBanners = (res: IBannersAPI) => ({
   type: RecommendActionType.TOP_BANNERS,
@@ -17,6 +22,21 @@ const hotRecommends = (res: IHotRecommendsAPI) => ({
 
 const newAlbums = (res: INewAlbumAPI) => ({
   type: RecommendActionType.NEW_ALBUM,
+  data: res
+})
+
+const upRanking = (res: ITopListAPI) => ({
+  type: RecommendActionType.UP_RANKING,
+  data: res
+})
+
+const newRanking = (res: ITopListAPI) => ({
+  type: RecommendActionType.NEW_RANKING,
+  data: res
+})
+
+const originRanking = (res: ITopListAPI) => ({
+  type: RecommendActionType.ORIGIN_RANKING,
   data: res
 })
 
@@ -46,6 +66,42 @@ export const getNewAlbumAction = (limit: number) => {
       dispatch(newAlbums(res))
     } catch (error) {
       console.log(error)
+    }
+  }
+}
+
+export const getTopListAction = (idx: number) => {
+  return async (dispatch: Dispatch) => {
+    switch (idx) {
+      // 飙升榜
+      case 3:
+        try {
+          const res = await getTopList(idx)
+          dispatch(upRanking(res))
+        } catch (error) {
+          console.log(error)
+        }
+        break;
+      // 新歌榜
+      case 0:
+        try {
+          const res = await getTopList(idx)
+          dispatch(newRanking(res))
+        } catch (error) {
+          console.log(error)
+        }
+        break;
+      // 原创榜
+      case 2:
+        try {
+          const res = await getTopList(idx)
+          dispatch(originRanking(res))
+        } catch (error) {
+          console.log(error)
+        }
+        break
+      default:
+        break;
     }
   }
 }
