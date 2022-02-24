@@ -1,4 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch, shallowEqual } from 'react-redux'
+
+import { getSongDetailAction } from '../store/actions'
 
 import { Slider } from 'antd'
 import { 
@@ -14,7 +17,19 @@ import {
 } from  '@ant-design/icons'
 import { AppPlayerBarWrapper, AppPlayerBarContent } from './styled'
 
+import type { ICombineReducers } from 'store/types'
+import type { IUseSelectorCurrentSongReturn } from '../types'
+
 export default function AppPlayerBar() {
+  const { currentSong } = useSelector<ICombineReducers, IUseSelectorCurrentSongReturn>((state) => ({
+    currentSong: state.player.currentSong
+  }), shallowEqual)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getSongDetailAction(167876))
+  }, [dispatch])
+
   return (
     <AppPlayerBarWrapper>
       <AppPlayerBarContent className='wrap-v2'>

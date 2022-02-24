@@ -20,3 +20,8 @@ export interface INewAlbumAPI extends ICommon {
 export interface ITopListAPI extends ICommon {
   playlist: Record<string, any>
 }
+
+export interface ISongDetailAPI extends ICommon {
+  songs: any[]
+  privileges: any[]
+}
