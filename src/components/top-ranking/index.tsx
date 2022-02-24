@@ -7,7 +7,6 @@ import type { ITopRankingProps } from './types'
 
 export default function TopRanking({ item }: ITopRankingProps) {
   const tracks: any[] = item.tracks?.slice(0, 10) || []
-  console.log(tracks);
   
   return (
     <TopRankingWrapper>

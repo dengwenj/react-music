@@ -1,10 +1,12 @@
-// 库
 import React from 'react'
-// 组件
+
 import TopBanner from './components/top-banner'
 import HotRecommend from './components/hot-recommend'
 import NewAlbum from './components/new-album'
 import RecommendRanking from './components/recommend-ranking'
+import UserLogin from './components/user-login'
+import SettleSinger from './components/settle-singer'
+import HotAnchor from './components/hot-anchor'
 import { RecommendWrapper, RecommendRight, RecommendLeft, Content } from './styled' 
 
 // 推荐模块
@@ -22,7 +24,9 @@ export default function Recommend() {
           <RecommendRanking />
         </RecommendLeft>
         <RecommendRight>
-          2
+          <UserLogin />
+          <SettleSinger />
+          <HotAnchor />
         </RecommendRight>
       </Content>
     </RecommendWrapper>
