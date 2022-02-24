@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
+import dayjs from 'dayjs'
 
 import { getSongDetailAction } from '../store/actions'
 
@@ -25,6 +26,8 @@ export default function AppPlayerBar() {
     currentSong: state.player.currentSong
   }), shallowEqual)
   const dispatch = useDispatch()
+  console.log(currentSong);
+  
 
   useEffect(() => {
     dispatch(getSongDetailAction(167876))
@@ -40,20 +43,20 @@ export default function AppPlayerBar() {
         </div>
         <div className='center'>
           <div className='image'>
-            <img src="http://p4.music.126.net/2CSVBewDknbP3c9m_G9Qeg==/112150186046323.jpg?param=34y34" alt="" />
+            <img src={currentSong?.al?.picUrl} alt="" />
           </div>
           <div className='info'>
             <div className='top'>
-              <span>故乡</span>
+              <span>{currentSong?.name}</span>
               <i><YoutubeOutlined /></i>
-              <em>许馨文</em>
+              <em>{currentSong?.ar?.[0]?.name}</em>
             </div>
             <div className='bottom'>
               <Slider defaultValue={30} />
               <div className='time'>
                 <i>02:40</i>
                 <em>/</em>
-                <span>02:40</span>
+                <span>{dayjs(currentSong?.dt).format('mm:ss')}</span>
               </div>
             </div>
           </div>
