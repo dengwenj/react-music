@@ -5,6 +5,7 @@ import dayjs from 'dayjs'
 import { getSongDetailAction } from '../store/actions'
 import getPlaySong from 'utils/getPlaySong'
 
+import { NavLink } from 'react-router-dom'
 import { Slider } from 'antd'
 import { 
   LeftCircleOutlined, 
@@ -84,9 +85,9 @@ export default function AppPlayerBar() {
           <em><RightCircleOutlined /></em>
         </div>
         <div className='center'>
-          <div className='image'>
+          <NavLink to={{ pathname: '/discover/player', search: `id=${currentSong?.id}` }} className='image'>
             <img src={currentSong?.al?.picUrl} alt="" />
-          </div>
+          </NavLink>
           <div className='info'>
             <div className='top'>
               <span>{currentSong?.name}</span>

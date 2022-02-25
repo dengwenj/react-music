@@ -17,6 +17,7 @@ import Songs from 'pages/discover/children-pages/songs'
 import Djradio from 'pages/discover/children-pages/djradio'
 import Artist from 'pages/discover/children-pages/artist'
 import Album from 'pages/discover/children-pages/album'
+import Player from 'pages/player'
 
 export default function RoutesConfig() {
   const routes: RouteObject[] = [
@@ -55,6 +56,10 @@ export default function RoutesConfig() {
         {
           path: 'album',
           element: <Album />
+        },
+        {
+          path: 'player',
+          element: <Player />
         }
       ]
     },
