@@ -10,6 +10,7 @@ export const TopRankingHeader = styled.div`
   img {
     width: 80px;
     height: 80px;
+    cursor: pointer;
   }
   .right {
     margin: 5px 0 0 10px;
@@ -18,6 +19,7 @@ export const TopRankingHeader = styled.div`
     strong {
       font-size: 14px;
       color: #000;
+      cursor: pointer;
     }
     span {
       color: #aaa;

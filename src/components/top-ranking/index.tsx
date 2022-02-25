@@ -22,12 +22,12 @@ export default function TopRanking({ item }: ITopRankingProps) {
   return (
     <TopRankingWrapper>
       <TopRankingHeader>
-        <img src={item.coverImgUrl} alt="" />
+        <img title={item.name} src={item.coverImgUrl} alt="" />
         <div className='right'>
-          <strong>{item.name}</strong>
+          <strong title={item.name}>{item.name}</strong>
           <span>
-            <i><PlayCircleOutlined /></i>
-            <em><FolderAddOutlined /></em>
+            <i title='播放'><PlayCircleOutlined /></i>
+            <em title='收藏'><FolderAddOutlined /></em>
           </span>          
         </div>
       </TopRankingHeader>
@@ -40,9 +40,9 @@ export default function TopRanking({ item }: ITopRankingProps) {
                 <div className='name-icon'>
                   <span className='name' title={item.name}>{item.name}</span>
                   <span className='icon'>
-                    <i onClick={handlePlayClick(item)}><PlayCircleOutlined /></i>
-                    <strong><PlusOutlined /></strong>
-                    <em><FolderAddOutlined /></em>
+                    <i title='播放' onClick={handlePlayClick(item)}><PlayCircleOutlined /></i>
+                    <strong title='添加到播放列表'><PlusOutlined /></strong>
+                    <em title='收藏'><FolderAddOutlined /></em>
                   </span>
                 </div>
               </div>

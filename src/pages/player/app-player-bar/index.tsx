@@ -111,15 +111,15 @@ export default function AppPlayerBar() {
         </div>
         <div className='right'>
           <div className='mfs'>
-            <span><MinusSquareOutlined /></span>
-            <span><FolderAddOutlined /></span>
-            <span><ShareAltOutlined /></span>
+            <span title='画中画歌词'><MinusSquareOutlined /></span>
+            <span title='收藏'><FolderAddOutlined /></span>
+            <span title='分享'><ShareAltOutlined /></span>
           </div>
           <div className='x'></div>
           <div className='other'>
-            <span><SoundOutlined /></span>
-            <i></i>
-            <em>1000</em>
+            <span title='音量'><SoundOutlined /></span>
+            <i title='要判断'></i>
+            <em title='播放列表'>1000</em>
           </div>
         </div>
       </AppPlayerBarContent>
