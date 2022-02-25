@@ -118,6 +118,8 @@ export default function AppPlayerBar() {
           <div className='x'></div>
           <div className='other'>
             <span><SoundOutlined /></span>
+            <i></i>
+            <em>1000</em>
           </div>
         </div>
       </AppPlayerBarContent>

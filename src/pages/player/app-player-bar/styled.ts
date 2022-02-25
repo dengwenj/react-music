@@ -130,7 +130,6 @@ export const AppPlayerBarContent = styled.div`
   .right {
     display: flex;
     align-items: center;
-    color: red;
     margin-left: 30px;
     .mfs {
       span {
@@ -159,6 +158,35 @@ export const AppPlayerBarContent = styled.div`
         cursor: pointer;
         :hover {
           color: #ccc;
+        }
+      }
+      i {
+        display: inline-block;
+        width: 25px;
+        height: 25px;
+        background: url(${require('assets/img/playbar_sprite.png')});
+        background-position: -66px -339px;
+        cursor: pointer;
+        :hover {
+          background-position: -93px -339px;
+        }
+      }
+      em {
+        display: inline-block;
+        position: relative;
+        top: -4px;
+        width: 60px;
+        height: 25px;
+        margin-left: 5px;
+        background: url(${require('assets/img/playbar_sprite.png')});
+        background-position: -42px -68px;
+        cursor: pointer;
+        text-align: center;
+        padding-left: 15px;
+        line-height: 25px;
+        color: #666;
+        :hover {
+          background-position: -42px -98px;
         }
       }
     }
