@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import dayjs from 'dayjs'
 
@@ -23,7 +23,9 @@ import type { ICombineReducers } from 'store/types'
 import type { IUseSelectorCurrentSongReturn } from '../types'
 
 export default function AppPlayerBar() {
-  const [currentTime, setCurrentTime] = useState(0) // 秒
+  const [currentTime, setCurrentTime] = useState(0) // 毫秒
+  const [sliderValue, setSliderValue] = useState(0) // 滑动条滑动
+  const [isChanging, setChanging] = useState(false) // 判断正在 change 拖动不
 
   const { currentSong } = useSelector<ICombineReducers, IUseSelectorCurrentSongReturn>((state) => ({
     currentSong: state.player.currentSong
@@ -44,8 +46,26 @@ export default function AppPlayerBar() {
     }
   }
   const handleTimeUpdate = (e: any) => {
-    setCurrentTime(e.target.currentTime * 1000) 
+    // 没有正在发生变化
+    if (!isChanging) {
+      setCurrentTime(e.target.currentTime * 1000)
+      setSliderValue(currentTime / currentSong?.dt * 100)
+    }
   }
+  // 滑动条移动的时候
+  const handleSliderChange = useCallback((value: number) => {
+    // 发生变了，设置为 true，不让滑动条跳动到原来那里
+    setChanging(true)
+    setSliderValue(value)
+    setCurrentTime((currentSong?.dt / 1000) * value / 100 * 1000)
+  }, [currentSong?.dt])
+  const handleAfterChange = useCallback((value: number) => {
+    // 拿到当前的时间
+    const currentTime = (currentSong?.dt / 1000) * value / 100
+    audioRef.current!.currentTime = currentTime
+    setCurrentTime(currentTime * 1000)
+    setChanging(false)
+  }, [currentSong?.dt])
 
   return (
     <AppPlayerBarWrapper>
@@ -66,7 +86,11 @@ export default function AppPlayerBar() {
               <em>{currentSong?.ar?.[0]?.name}</em>
             </div>
             <div className='bottom'>
-              <Slider value={currentTime / currentSong?.dt * 100} />
+              <Slider 
+                value={sliderValue} 
+                onChange={handleSliderChange}
+                onAfterChange={handleAfterChange}
+                />
               <div className='time'> 
                 <i>{dayjs(currentTime).format('mm:ss')}</i>
                 <em>/</em>
