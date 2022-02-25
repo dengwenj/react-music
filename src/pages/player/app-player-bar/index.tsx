@@ -23,28 +23,33 @@ import type { ICombineReducers } from 'store/types'
 import type { IUseSelectorCurrentSongReturn } from '../types'
 
 export default function AppPlayerBar() {
+  // react state
   const [currentTime, setCurrentTime] = useState(0) // 毫秒
   const [sliderValue, setSliderValue] = useState(0) // 滑动条滑动
   const [isChanging, setChanging] = useState(false) // 判断正在 change 拖动不
+  const [isPlaying, setIsPlaying] = useState(false) // 暂停启动播放 默然是暂停
 
+  // redux state
   const { currentSong } = useSelector<ICombineReducers, IUseSelectorCurrentSongReturn>((state) => ({
     currentSong: state.player.currentSong
   }), shallowEqual)
   const dispatch = useDispatch()
-  console.log(currentSong);
   
+  // react hooks
   const audioRef = useRef<HTMLAudioElement>(null)
   useEffect(() => {
     dispatch(getSongDetailAction(167876))
   }, [dispatch])
+  useEffect(() => {
+    audioRef.current!.src = getPlaySong(currentSong?.id)
+  }, [currentSong])
 
-  const handlePlaySong = () => {
-    if (audioRef.current) {
-      audioRef.current.src = getPlaySong(currentSong?.id)
-      // play 播放
-      audioRef.current.play()
-    }
-  }
+  // handle function
+  const handlePlaySong = useCallback(() => {
+    isPlaying ? audioRef.current!.pause() : audioRef.current!.play()
+    // 写在下面。写在上面的话，因为修改 setIsPlaying 这个是异步的 不会立即拿到 isPlaying， 所以在这里拿到还是之前的isPlaying
+    setIsPlaying(!isPlaying)
+  }, [isPlaying])
   const handleTimeUpdate = (e: any) => {
     // 没有正在发生变化
     if (!isChanging) {
@@ -60,19 +65,22 @@ export default function AppPlayerBar() {
     setCurrentTime((currentSong?.dt / 1000) * value / 100 * 1000)
   }, [currentSong?.dt])
   const handleAfterChange = useCallback((value: number) => {
-    // 拿到当前的时间
+    // 拿到当前的时间,当前时间变了就会触发 onTimeUpdate，当前时间是多少就会播放那个时间段
     const currentTime = (currentSong?.dt / 1000) * value / 100
     audioRef.current!.currentTime = currentTime
     setCurrentTime(currentTime * 1000)
     setChanging(false)
-  }, [currentSong?.dt])
+
+    // 当松开 也播放
+    if (!isPlaying) handlePlaySong()
+  }, [currentSong?.dt, isPlaying, handlePlaySong])
 
   return (
     <AppPlayerBarWrapper>
       <AppPlayerBarContent className='wrap-v2'>
         <div className='left'>
           <i><LeftCircleOutlined /></i>
-          <strong onClick={handlePlaySong}><PlayCircleOutlined /></strong>
+          <strong onClick={handlePlaySong}>{!isPlaying ? <PlayCircleOutlined /> : <PauseCircleOutlined />}</strong>
           <em><RightCircleOutlined /></em>
         </div>
         <div className='center'>
@@ -86,7 +94,8 @@ export default function AppPlayerBar() {
               <em>{currentSong?.ar?.[0]?.name}</em>
             </div>
             <div className='bottom'>
-              <Slider 
+              <Slider
+                tooltipVisible={false}
                 value={sliderValue} 
                 onChange={handleSliderChange}
                 onAfterChange={handleAfterChange}
@@ -111,7 +120,7 @@ export default function AppPlayerBar() {
           </div>
         </div>
       </AppPlayerBarContent>
-      {/* 播放音乐 */}
+      {/* 播放音乐 播放就会一直触发 onTimeUpdate 这个钩子拿到当前的时间，当前的时间也是可以修改的有个 currentTime 属性，修改了当前时间就会播放当前的那个时间段 */}
       <audio ref={audioRef} onTimeUpdate={handleTimeUpdate} />
     </AppPlayerBarWrapper>
   )

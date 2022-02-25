@@ -7,6 +7,7 @@ export const AppPlayerBarWrapper = styled.div`
   bottom: 0;
   height: 52px;
   background: url(${require('assets/img/playbar_sprite.png')}) repeat;
+  z-index: 999999999999;
 `
 
 export const AppPlayerBarContent = styled.div`
