@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import dayjs from 'dayjs'
 
 import { getSongDetailAction } from '../store/actions'
+import getPlaySong from 'utils/getPlaySong'
 
 import { Slider } from 'antd'
 import { 
@@ -22,23 +23,36 @@ import type { ICombineReducers } from 'store/types'
 import type { IUseSelectorCurrentSongReturn } from '../types'
 
 export default function AppPlayerBar() {
+  const [currentTime, setCurrentTime] = useState(0) // 秒
+
   const { currentSong } = useSelector<ICombineReducers, IUseSelectorCurrentSongReturn>((state) => ({
     currentSong: state.player.currentSong
   }), shallowEqual)
   const dispatch = useDispatch()
   console.log(currentSong);
   
-
+  const audioRef = useRef<HTMLAudioElement>(null)
   useEffect(() => {
     dispatch(getSongDetailAction(167876))
   }, [dispatch])
+
+  const handlePlaySong = () => {
+    if (audioRef.current) {
+      audioRef.current.src = getPlaySong(currentSong?.id)
+      // play 播放
+      audioRef.current.play()
+    }
+  }
+  const handleTimeUpdate = (e: any) => {
+    setCurrentTime(e.target.currentTime * 1000) 
+  }
 
   return (
     <AppPlayerBarWrapper>
       <AppPlayerBarContent className='wrap-v2'>
         <div className='left'>
           <i><LeftCircleOutlined /></i>
-          <strong><PauseCircleOutlined /></strong>
+          <strong onClick={handlePlaySong}><PlayCircleOutlined /></strong>
           <em><RightCircleOutlined /></em>
         </div>
         <div className='center'>
@@ -52,9 +66,9 @@ export default function AppPlayerBar() {
               <em>{currentSong?.ar?.[0]?.name}</em>
             </div>
             <div className='bottom'>
-              <Slider defaultValue={30} />
-              <div className='time'>
-                <i>02:40</i>
+              <Slider value={currentTime / currentSong?.dt * 100} />
+              <div className='time'> 
+                <i>{dayjs(currentTime).format('mm:ss')}</i>
                 <em>/</em>
                 <span>{dayjs(currentSong?.dt).format('mm:ss')}</span>
               </div>
@@ -73,6 +87,8 @@ export default function AppPlayerBar() {
           </div>
         </div>
       </AppPlayerBarContent>
+      {/* 播放音乐 */}
+      <audio ref={audioRef} onTimeUpdate={handleTimeUpdate} />
     </AppPlayerBarWrapper>
   )
 }
