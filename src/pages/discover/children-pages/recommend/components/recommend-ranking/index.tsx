@@ -30,7 +30,7 @@ export default function RecommendRanking() {
       <RecommendRankingContent>
         {
           Object.keys(rankingObj).map((item) => {
-            return <TopRanking item={(rankingObj as any)[item]} />
+            return <TopRanking item={(rankingObj as any)[item]} key={item} />
           })
         }
       </RecommendRankingContent>

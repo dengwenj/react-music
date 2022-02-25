@@ -1,7 +1,16 @@
+import type { ICombineReducers } from "store/types";
+
+export type Obj = Record<string, any> | null
 export interface IPlayerState {
-  currentSong: Record<string, any> | null
+  playList: Obj[]
+  currentSongIndex: number
+  currentSong: Obj
 }
 
 export interface IUseSelectorCurrentSongReturn {
-  currentSong: Record<string, any> | null
+  currentSong: Obj
+}
+
+export interface IGetState {
+  (): ICombineReducers
 }
