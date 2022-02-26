@@ -1,5 +1,6 @@
 
 import { PlayerActionType } from "./constants"
+import { Sequence } from '../types'
 
 import type { IAction } from "store/types"
 import type { IPlayerState } from "../types"
@@ -8,7 +9,8 @@ import type { IPlayerState } from "../types"
 const initState: IPlayerState = {
   playList: [],
   currentSongIndex: 0,
-  currentSong: {}
+  currentSong: {},
+  sequence: Sequence.cycle
 }
 
 export default function reducer(state: IPlayerState = initState, action: IAction<any>) {
@@ -20,6 +22,8 @@ export default function reducer(state: IPlayerState = initState, action: IAction
       return { ...state, currentSongIndex: action.data }
     case PlayerActionType.CHANGE_CURRENT_SONG:
       return { ...state, currentSong: action.data }
+    case PlayerActionType.CHANGE_SEQUENCE:
+      return { ...state, sequence: action.data }
     default:
       return { ...state }
   }

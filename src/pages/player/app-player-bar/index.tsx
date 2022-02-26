@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import dayjs from 'dayjs'
 
-import { getSongDetailAction } from '../store/actions'
+import { getSongDetailAction, changeSequence } from '../store/actions'
 import getPlaySong from 'utils/getPlaySong'
 
 import { NavLink } from 'react-router-dom'
@@ -21,7 +21,7 @@ import {
 import { AppPlayerBarWrapper, AppPlayerBarContent } from './styled'
 
 import type { ICombineReducers } from 'store/types'
-import type { IUseSelectorCurrentSongReturn } from '../types'
+import { IUseSelectorCurrentSongReturn, Sequence } from '../types'
 
 export default function AppPlayerBar() {
   // react state
@@ -31,8 +31,9 @@ export default function AppPlayerBar() {
   const [isPlaying, setIsPlaying] = useState(false) // 暂停启动播放 默然是暂停
 
   // redux state
-  const { currentSong } = useSelector<ICombineReducers, IUseSelectorCurrentSongReturn>((state) => ({
-    currentSong: state.player.currentSong
+  const { currentSong, sequence } = useSelector<ICombineReducers, IUseSelectorCurrentSongReturn>((state) => ({
+    currentSong: state.player.currentSong,
+    sequence: state.player.sequence
   }), shallowEqual)
   const dispatch = useDispatch()
   
@@ -76,9 +77,15 @@ export default function AppPlayerBar() {
     if (!isPlaying) handlePlaySong()
   }, [currentSong?.dt, isPlaying, handlePlaySong])
 
+  const handleSequenceClick = () => {
+    let currentSequence = sequence + 1
+    if (currentSequence > 2) currentSequence = 0
+    dispatch(changeSequence(currentSequence))
+  }
+
   return (
     <AppPlayerBarWrapper>
-      <AppPlayerBarContent className='wrap-v2'>
+      <AppPlayerBarContent className='wrap-v2' sequence={sequence}>
         <div className='left'>
           <i><LeftCircleOutlined /></i>
           <strong onClick={handlePlaySong}>{!isPlaying ? <PlayCircleOutlined /> : <PauseCircleOutlined />}</strong>
@@ -118,7 +125,10 @@ export default function AppPlayerBar() {
           <div className='x'></div>
           <div className='other'>
             <span title='音量'><SoundOutlined /></span>
-            <i title='要判断'></i>
+            <i 
+              title={sequence === Sequence.cycle ? '循环' : (sequence === Sequence.random ? '随机' : '单曲循环')} 
+              onClick={handleSequenceClick}
+            />
             <em title='播放列表'>1000</em>
           </div>
         </div>

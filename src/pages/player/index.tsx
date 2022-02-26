@@ -11,9 +11,9 @@ export default function Player() {
   const location = useLocation()
   const id = Number(location.search.split('=')[1])
 
-  const { currentSong } = useSelector<ICombineReducers, IUseSelectorCurrentSongReturn>((state) => ({
-    currentSong: state.player.currentSong
-  }), shallowEqual)
+  // const { currentSong } = useSelector<ICombineReducers, IUseSelectorCurrentSongReturn>((state) => ({
+  //   currentSong: state.player.currentSong
+  // }), shallowEqual)
   // console.log(currentSong)
   
   return (

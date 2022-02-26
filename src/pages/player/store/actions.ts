@@ -3,7 +3,7 @@ import { PlayerActionType } from './constants'
 import { getSongDetail } from 'services/api/player'
 
 import type { Dispatch } from "redux"
-import type { IGetState, Obj } from '../types'
+import type { IGetState, Obj, Sequence } from '../types'
 
 const changePlayList = (playList: Obj[]) => ({
   type: PlayerActionType.CHANGE_PLAY_LIST,
@@ -18,6 +18,11 @@ const changeCurrentSongIndex = (index: number) => ({
 const changeCurrentSong = (song: Obj) => ({
   type: PlayerActionType.CHANGE_CURRENT_SONG,
   data: song
+})
+
+export const changeSequence = (sequence: Sequence) => ({
+  type: PlayerActionType.CHANGE_SEQUENCE,
+  data: sequence
 })
  
 export const getSongDetailAction = (ids: number) => {

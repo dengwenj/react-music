@@ -1,5 +1,11 @@
 import styled from "styled-components"
 
+import { Sequence } from "../types"
+
+interface ISequence {
+  sequence: Sequence
+}
+
 export const AppPlayerBarWrapper = styled.div`
   position: fixed;
   left: 0;
@@ -10,7 +16,7 @@ export const AppPlayerBarWrapper = styled.div`
   z-index: 999999999999;
 `
 
-export const AppPlayerBarContent = styled.div`
+export const AppPlayerBarContent = styled.div<ISequence>`
   display: flex;
   margin-top: 10px;
   .left {
@@ -166,9 +172,32 @@ export const AppPlayerBarContent = styled.div`
         height: 25px;
         background: url(${require('assets/img/playbar_sprite.png')});
         background-position: -66px -339px;
+        background-position: ${(props) => {
+          switch (props.sequence) {
+            case Sequence.cycle:
+              return '-3px -339px'
+            case Sequence.random:
+              return '-66px -243px'
+            case Sequence.singleCycle:
+              return '-66px -339px'
+            default:
+              return '-3px -339px'
+          }
+        }};
         cursor: pointer;
         :hover {
-          background-position: -93px -339px;
+          background-position: ${(props) => {
+            switch (props.sequence) {
+              case Sequence.cycle:
+                return '-33px -339px'
+              case Sequence.random:
+                return '-93px -243px'
+              case Sequence.singleCycle:
+                return '-93px -339px'
+              default:
+                return '-33px -339px'
+            }
+          }};
         }
       }
       em {
