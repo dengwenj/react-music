@@ -72,20 +72,16 @@ export const changeCurrentSongAndCurrentIndex = (tag: PrevOrNext) => {
       default: // 顺序播放 单曲循环也是顺序播放 点击上一首或下一首
         let currentSongIndexNext: number
         let currentSongNext: Obj
+        currentSongIndexNext = currentSongIndex + tag
+        currentSongNext = playList[currentSongIndexNext]
         if (tag === PrevOrNext.next) { // 点的下一首
           if (currentSongIndex >= playList.length - 1) {
             currentSongIndexNext = 0
-            currentSongNext = playList[currentSongIndexNext]
-          } else {
-            currentSongIndexNext = currentSongIndex + tag
             currentSongNext = playList[currentSongIndexNext]
           }
         } else { // 点的上一首
           if (currentSongIndex === 0) {
             currentSongIndexNext = playList.length - 1
-            currentSongNext = playList[currentSongIndexNext]
-          } else {
-            currentSongIndexNext = currentSongIndex + tag
             currentSongNext = playList[currentSongIndexNext]
           }
         }
