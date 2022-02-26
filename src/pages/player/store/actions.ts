@@ -1,6 +1,6 @@
 import { PlayerActionType } from './constants'
 
-import { getSongDetail } from 'services/api/player'
+import { getSongDetail, getLyric } from 'services/api/player'
 import { Sequence, PrevOrNext } from '../types'
 
 import type { Dispatch } from "redux"
@@ -43,35 +43,35 @@ function randomPlayHandleFunc(
   while (currentSongIndexNext1 === currentSongIndex) { // 相等的话就一直循环
     currentSongIndexNext1 = Math.floor(Math.random() * playList.length)
   }
-  currentSongNext1 = playList[currentSongIndexNext1]  
+  currentSongNext1 = playList[currentSongIndexNext1]
+  
   dispatch(changePreSongIndexArr([...preSongIndexArr, currentSongIndex]))
   dispatch(changeCurrentSongIndex(currentSongIndexNext1))
   dispatch(changeCurrentSong(currentSongNext1))
+  return currentSongNext1
 }
 
 export const changeCurrentSongAndCurrentIndex = (tag: PrevOrNext) => {
-  return (dispatch: Dispatch, getState: IGetState) => {
+  return (dispatch: Dispatch<any>, getState: IGetState) => {
     const { sequence, currentSongIndex, playList, preSongIndexArr } = getState().player
-    // 下面的有些可以不放在 switch 里面 放在外面
+    let currentSongIndexNext: number
+    let currentSongNext: Obj // currentSongNext 和 randomPlayHandleFunc这个函数的参数 currentSongNext1 不是一个的
     switch (sequence) {
       case Sequence.random: // 随机播放
-        let currentSongIndexNext1: number
-        let currentSongNext1: Obj
         if (tag === PrevOrNext.prev) { // 随机播放的话如果点击的上一首的话是播放上一次的不是随机的，只要点击下一首才是随机的
           if (preSongIndexArr.length === 0) {
-            randomPlayHandleFunc(currentSongIndexNext1!, currentSongIndex, currentSongNext1!, preSongIndexArr, playList, dispatch)
-            return
+            currentSongNext = randomPlayHandleFunc(currentSongIndexNext!, currentSongIndex, currentSongNext!, preSongIndexArr, playList, dispatch)
+            break
           }
-          dispatch(changeCurrentSong(playList[preSongIndexArr[preSongIndexArr.length - 1]]))
+          currentSongNext = playList[preSongIndexArr[preSongIndexArr.length - 1]]
+          dispatch(changeCurrentSong(currentSongNext))
           const newPreSongIndexArr = preSongIndexArr.slice(0, -1) // 返回一个新的数组
           dispatch(changePreSongIndexArr(newPreSongIndexArr))
-          return
+          break
         }
-        randomPlayHandleFunc(currentSongIndexNext1!, currentSongIndex, currentSongNext1!, preSongIndexArr, playList, dispatch)
+        currentSongNext = randomPlayHandleFunc(currentSongIndexNext!, currentSongIndex, currentSongNext!, preSongIndexArr, playList, dispatch)
         break
       default: // 顺序播放 单曲循环也是顺序播放 点击上一首或下一首
-        let currentSongIndexNext: number
-        let currentSongNext: Obj
         currentSongIndexNext = currentSongIndex + tag
         currentSongNext = playList[currentSongIndexNext]
         if (tag === PrevOrNext.next) { // 点的下一首
@@ -89,11 +89,13 @@ export const changeCurrentSongAndCurrentIndex = (tag: PrevOrNext) => {
         dispatch(changeCurrentSong(currentSongNext))
         break
     }
+    // 请求歌词
+    dispatch(getLyricAction(currentSongNext!.id))
   }
 }
- 
+
 export const getSongDetailAction = (ids: number) => {
-  return async (dispatch: Dispatch, getState: IGetState) => {
+  return async (dispatch: Dispatch<any>, getState: IGetState) => {
     // 根据 id 查找 playList 中是否已经有了该歌曲
     const { playList } = getState().player
     const songIndex = playList.findIndex((song) => song?.id === ids)
@@ -101,7 +103,11 @@ export const getSongDetailAction = (ids: number) => {
     // itemSong 为 -1 说明没有该歌曲，不为 -1 说明有该歌曲
     if (songIndex !== -1) { // 说明找到了
       dispatch(changeCurrentSongIndex(songIndex))
+      const song = playList[songIndex]
       dispatch(changeCurrentSong(playList[songIndex]))
+
+      // 请求歌词
+      dispatch(getLyricAction(song?.id))
       return
     }
     // 没有找到，发送请求 拿到具体的这个歌曲的所有数据 detail
@@ -113,8 +119,22 @@ export const getSongDetailAction = (ids: number) => {
       dispatch(changePlayList(newPlayList))
       dispatch(changeCurrentSongIndex(newPlayList.length - 1))
       dispatch(changeCurrentSong(res.songs?.[0]))
+
+      // 请求歌词
+      dispatch(getLyricAction(song.id))
     } catch (error) {
       console.log(error)
+    }
+  }
+}
+
+export const getLyricAction = (id: number) => {
+  return async (dispatch: Dispatch) => {
+    try {
+      const res = await getLyric(id)
+      console.log(res?.lrc?.lyric)
+    } catch (error) {
+      
     }
   }
 }

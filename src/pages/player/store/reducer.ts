@@ -5,7 +5,6 @@ import { Sequence } from '../types'
 import type { IAction } from "store/types"
 import type { IPlayerState } from "../types"
 
-
 const initState: IPlayerState = {
   playList: [
 
