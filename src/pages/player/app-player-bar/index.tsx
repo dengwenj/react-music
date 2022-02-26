@@ -60,6 +60,8 @@ export default function AppPlayerBar() {
     setIsPlaying(!isPlaying)
   }, [isPlaying])
   const handleTimeUpdate = (e: any) => {
+    // console.log(e.target.currentTime);
+    
     // 没有正在发生变化
     if (!isChanging) {
       setCurrentTime(e.target.currentTime * 1000)

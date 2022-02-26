@@ -1,10 +1,12 @@
 import { PlayerActionType } from './constants'
 
+import parseLyric from 'utils/parseLyric'
 import { getSongDetail, getLyric } from 'services/api/player'
 import { Sequence, PrevOrNext } from '../types'
 
 import type { Dispatch } from "redux"
-import type { IGetState, Obj } from '../types'
+import type { IGetState, Obj,  } from '../types'
+import type { ItimeAndLyricObj } from 'utils/parseLyric'
 
 const changePlayList = (playList: Obj[]) => ({
   type: PlayerActionType.CHANGE_PLAY_LIST,
@@ -25,6 +27,15 @@ const changeCurrentSong = (song: Obj) => ({
   type: PlayerActionType.CHANGE_CURRENT_SONG,
   data: song
 })
+
+const changeLyrics = (timeAndLyricArr: ItimeAndLyricObj[]) => {
+  console.log(timeAndLyricArr);
+  
+  return ({
+  type: PlayerActionType.CHANGE_LYRICS,
+  data: timeAndLyricArr
+})
+}
 
 export const changeSequence = (sequence: Sequence) => ({
   type: PlayerActionType.CHANGE_SEQUENCE,
@@ -132,9 +143,12 @@ export const getLyricAction = (id: number) => {
   return async (dispatch: Dispatch) => {
     try {
       const res = await getLyric(id)
-      console.log(res?.lrc?.lyric)
+      const timeAndLyricArr = parseLyric(res?.lrc?.lyric)
+      console.log(timeAndLyricArr);
+      
+      // dispatch(changeLyrics(timeAndLyricArr))
     } catch (error) {
       
     }
-  }
+  } 
 }

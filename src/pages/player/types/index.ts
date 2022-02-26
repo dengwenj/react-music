@@ -1,4 +1,5 @@
 import type { ICombineReducers } from "store/types";
+import type { ItimeAndLyricObj } from "utils/parseLyric";
 
 export type Obj = Record<string, any> | null
 export interface IPlayerState {
@@ -6,7 +7,8 @@ export interface IPlayerState {
   preSongIndexArr: number[]
   currentSongIndex: number
   currentSong: Obj,
-  sequence: Sequence
+  sequence: Sequence,
+  timeAndLyricArr: ItimeAndLyricObj[]
 }
 
 export interface IUseSelectorCurrentSongReturn {

@@ -387,7 +387,8 @@ const initState: IPlayerState = {
   preSongIndexArr: [0],
   currentSongIndex: 0,
   currentSong: {},
-  sequence: Sequence.cycle
+  sequence: Sequence.cycle,
+  timeAndLyricArr: []
 }
 
 export default function reducer(state: IPlayerState = initState, action: IAction<any>) {
@@ -403,6 +404,8 @@ export default function reducer(state: IPlayerState = initState, action: IAction
       return { ...state, sequence: action.data }
     case PlayerActionType.CHANGE_PRE_SONG_INDEX: 
       return { ...state, preSongIndexArr: action.data }
+    case PlayerActionType.CHANGE_LYRICS:
+      return { ...state, timeAndLyricArr: action.data }
     default:
       return { ...state }
   }
