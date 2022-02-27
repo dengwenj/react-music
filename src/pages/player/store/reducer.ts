@@ -382,6 +382,85 @@ const initState: IPlayerState = {
     "tns": [
         "The Drum Tower"
     ]
+},
+{
+    "name": "阿刁",
+    "id": 447925059,
+    "pst": 0,
+    "t": 0,
+    "ar": [
+        {
+            "id": 6731,
+            "name": "赵雷",
+            "tns": [],
+            "alias": []
+        }
+    ],
+    "alia": [
+        "Diao"
+    ],
+    "pop": 100,
+    "st": 0,
+    "rt": null,
+    "fee": 8,
+    "v": 31,
+    "crbt": null,
+    "cf": "",
+    "al": {
+        "id": 35069014,
+        "name": "无法长大",
+        "picUrl": "https://p2.music.126.net/BJgUd9aD9gpougZFASRTTw==/18548761162235571.jpg",
+        "tns": [],
+        "pic_str": "18548761162235571",
+        "pic": 18548761162235572
+    },
+    "dt": 374120,
+    "h": {
+        "br": 320000,
+        "fid": 0,
+        "size": 14967162,
+        "vd": -2
+    },
+    "m": {
+        "br": 192000,
+        "fid": 0,
+        "size": 8980315,
+        "vd": -2
+    },
+    "l": {
+        "br": 128000,
+        "fid": 0,
+        "size": 5986891,
+        "vd": -2
+    },
+    "a": null,
+    "cd": "1",
+    "no": 3,
+    "rtUrl": null,
+    "ftype": 0,
+    "rtUrls": [],
+    "djId": 0,
+    "copyright": 2,
+    "s_id": 0,
+    "mark": 8192,
+    "originCoverType": 1,
+    "originSongSimpleData": null,
+    "tagPicList": null,
+    "resourceState": true,
+    "version": 31,
+    "songJumpInfo": null,
+    "entertainmentTags": null,
+    "single": 0,
+    "noCopyrightRcmd": null,
+    "rtype": 0,
+    "rurl": null,
+    "mst": 9,
+    "cp": 1400821,
+    "mv": 0,
+    "publishTime": 1482249600007,
+    "tns": [
+        "Diao"
+    ]
 }
   ],
   preSongIndexArr: [0],
