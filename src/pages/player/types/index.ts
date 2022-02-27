@@ -14,7 +14,8 @@ export interface IPlayerState {
 export interface IUseSelectorCurrentSongReturn {
   currentSong: Obj,
   sequence: Sequence,
-  playList: Obj[]
+  playList: Obj[],
+  timeAndLyricArr: ItimeAndLyricObj[]
 }
 
 export interface IGetState {

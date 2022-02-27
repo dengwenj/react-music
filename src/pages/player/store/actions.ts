@@ -100,7 +100,7 @@ export const changeCurrentSongAndCurrentIndex = (tag: PrevOrNext) => {
     dispatch(getLyricAction(currentSongNext!.id))
   }
 }
-
+// 当前的歌曲
 export const getSongDetailAction = (ids: number) => {
   return async (dispatch: Dispatch<any>, getState: IGetState) => {
     // 根据 id 查找 playList 中是否已经有了该歌曲

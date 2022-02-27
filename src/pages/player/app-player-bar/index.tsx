@@ -31,10 +31,11 @@ export default function AppPlayerBar() {
   const [isPlaying, setIsPlaying] = useState(false) // 暂停启动播放 默然是暂停
 
   // redux state
-  const { currentSong, sequence, playList } = useSelector<ICombineReducers, IUseSelectorCurrentSongReturn>((state) => ({
+  const { currentSong, sequence, playList, timeAndLyricArr } = useSelector<ICombineReducers, IUseSelectorCurrentSongReturn>((state) => ({
     currentSong: state.player.currentSong,
     sequence: state.player.sequence,
-    playList: state.player.playList
+    playList: state.player.playList,
+    timeAndLyricArr: state.player.timeAndLyricArr
   }), shallowEqual)
   const dispatch = useDispatch()
   
@@ -47,6 +48,7 @@ export default function AppPlayerBar() {
     audioRef.current!.src = getPlaySong(currentSong?.id)
     // 刷新一上来是没有播放的 直接 audioRef.current!.play() 这样写会报错，他返回 promise
     audioRef.current!.play().then((res) => {
+      setIsPlaying(true)
       // console.log(res)
     }).catch((error) => {
       // console.log(error)
@@ -61,12 +63,20 @@ export default function AppPlayerBar() {
   }, [isPlaying])
   const handleTimeUpdate = (e: any) => {
     // console.log(e.target.currentTime);
-    
     // 没有正在发生变化
     if (!isChanging) {
       setCurrentTime(e.target.currentTime * 1000)
       setSliderValue(currentTime / currentSong?.dt * 100)
     }
+    let i1: number = 0
+    for (let i = 0; i < timeAndLyricArr.length; i++) {
+      if (e.target.currentTime * 1000 < timeAndLyricArr[i].time) {
+        i1 = i - 1 // 拿到上一次的索引
+        break // 跳出循环 必须要跳出
+      }
+    }
+    console.log(timeAndLyricArr[i1]?.lyric);
+    
   }
   // 滑动条移动的时候
   const handleSliderChange = useCallback((value: number) => {
