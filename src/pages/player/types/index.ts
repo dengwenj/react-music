@@ -9,13 +9,15 @@ export interface IPlayerState {
   currentSong: Obj,
   sequence: Sequence,
   timeAndLyricArr: ItimeAndLyricObj[]
+  currentLyricIndex: number
 }
 
 export interface IUseSelectorCurrentSongReturn {
   currentSong: Obj,
   sequence: Sequence,
   playList: Obj[],
-  timeAndLyricArr: ItimeAndLyricObj[]
+  timeAndLyricArr: ItimeAndLyricObj[],
+  currentLyricIndex: number
 }
 
 export interface IGetState {

@@ -33,6 +33,11 @@ const changeLyrics = (timeAndLyricArr: ItimeAndLyricObj[]) => ({
   data: timeAndLyricArr
 })
 
+export const changeCurrentLyricIndex = (index: number) => ({
+  type: PlayerActionType.CHANGE_CURRENT_LYRIC_INDEX,
+  data: index
+})
+
 export const changeSequence = (sequence: Sequence) => ({
   type: PlayerActionType.CHANGE_SEQUENCE,
   data: sequence

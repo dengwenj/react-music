@@ -2,7 +2,12 @@ import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import dayjs from 'dayjs'
 
-import { getSongDetailAction, changeSequence, changeCurrentSongAndCurrentIndex } from '../store/actions'
+import { 
+  getSongDetailAction, 
+  changeSequence, 
+  changeCurrentSongAndCurrentIndex, 
+  changeCurrentLyricIndex
+} from '../store/actions'
 import getPlaySong from 'utils/getPlaySong'
 
 import { NavLink } from 'react-router-dom'
@@ -31,11 +36,18 @@ export default function AppPlayerBar() {
   const [isPlaying, setIsPlaying] = useState(false) // 暂停启动播放 默然是暂停
 
   // redux state
-  const { currentSong, sequence, playList, timeAndLyricArr } = useSelector<ICombineReducers, IUseSelectorCurrentSongReturn>((state) => ({
+  const { 
+    currentSong,
+    sequence,
+    playList, 
+    timeAndLyricArr,
+    currentLyricIndex
+  } = useSelector<ICombineReducers, IUseSelectorCurrentSongReturn>((state) => ({
     currentSong: state.player.currentSong,
     sequence: state.player.sequence,
     playList: state.player.playList,
-    timeAndLyricArr: state.player.timeAndLyricArr
+    timeAndLyricArr: state.player.timeAndLyricArr,
+    currentLyricIndex: state.player.currentLyricIndex
   }), shallowEqual)
   const dispatch = useDispatch()
   
@@ -68,6 +80,7 @@ export default function AppPlayerBar() {
       setCurrentTime(e.target.currentTime * 1000)
       setSliderValue(currentTime / currentSong?.dt * 100)
     }
+    // 获取当前歌词
     let i1: number = 0
     for (let i = 0; i < timeAndLyricArr.length; i++) {
       if (e.target.currentTime * 1000 < timeAndLyricArr[i].time) {
@@ -75,8 +88,11 @@ export default function AppPlayerBar() {
         break // 跳出循环 必须要跳出
       }
     }
-    console.log(timeAndLyricArr[i1]?.lyric);
-    
+    // 不相等的时候才 dispatch
+    if (i1 !== currentLyricIndex) {
+      dispatch(changeCurrentLyricIndex(i1))
+      console.log(timeAndLyricArr[i1]) // 不能用 currentLyricIndex 只能用 i1 因为还没有更新
+    }
   }
   // 滑动条移动的时候
   const handleSliderChange = useCallback((value: number) => {
