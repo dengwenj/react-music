@@ -1,23 +1,37 @@
 /**
  * 这里面要写一个组件，不然的话 element: <WJAppFooter /> 这里会报错 说不能将值作为类型什么的
  */
-
+import React, { lazy } from 'react'
 import { Navigate, useRoutes } from 'react-router-dom'
 
 import type { RouteObject } from 'react-router-dom'
 
-import Discover from 'pages/discover'
-import Mine from 'pages/mine'
-import Friend from 'pages/friend'
-import NotFount from 'pages/not-found'
+const Discover = lazy(() => import('pages/discover'))
+const Mine = lazy(() => import('pages/mine'))
+const Friend = lazy(() => import('pages/friend'))
+const NotFount = lazy(() => import('pages/not-found'))
 
-import Recommend from 'pages/discover/children-pages/recommend'
-import Ranking from 'pages/discover/children-pages/ranking'
-import Songs from 'pages/discover/children-pages/songs'
-import Djradio from 'pages/discover/children-pages/djradio'
-import Artist from 'pages/discover/children-pages/artist'
-import Album from 'pages/discover/children-pages/album'
-import Player from 'pages/player'
+const Recommend = lazy(() => import('pages/discover/children-pages/recommend'))
+const Ranking = lazy(() => import('pages/discover/children-pages/ranking'))
+const Songs = lazy(() => import('pages/discover/children-pages/songs'))
+const Djradio = lazy(() => import('pages/discover/children-pages/djradio'))
+const Artist = lazy(() => import('pages/discover/children-pages/artist'))
+const Album = lazy(() => import('pages/discover/children-pages/album'))
+const Player = lazy(() => import('pages/player'))
+
+
+// import Discover from 'pages/discover'
+// import Mine from 'pages/mine'
+// import Friend from 'pages/friend'
+// import NotFount from 'pages/not-found'
+
+// import Recommend from 'pages/discover/children-pages/recommend'
+// import Ranking from 'pages/discover/children-pages/ranking'
+// import Songs from 'pages/discover/children-pages/songs'
+// import Djradio from 'pages/discover/children-pages/djradio'
+// import Artist from 'pages/discover/children-pages/artist'
+// import Album from 'pages/discover/children-pages/album'
+// import Player from 'pages/player'
 
 export default function RoutesConfig() {
   const routes: RouteObject[] = [

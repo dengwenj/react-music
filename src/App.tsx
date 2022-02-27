@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, Suspense } from 'react'
 import { HashRouter as Router } from 'react-router-dom'
 import { Provider } from 'react-redux'
 
@@ -17,8 +17,10 @@ export default memo(function App() {
       <Provider store={store}>
         <Router>
           <WJAppHeather />
-          {/* 映射路由 是写的组件 这里也相当于占个位，然后匹配到路径就在这里展示。 一级路由*/}
-          <RoutesConfig />
+          <Suspense fallback={<div>正在加载中...</div>}>
+            {/* 映射路由 是写的组件 这里也相当于占个位，然后匹配到路径就在这里展示。 一级路由*/}
+            <RoutesConfig />
+          </Suspense>
           <WJAppFooter />
           <WJBackTop />
           <AppPlayerBar />
