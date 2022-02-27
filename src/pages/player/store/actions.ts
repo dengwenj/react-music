@@ -28,14 +28,10 @@ const changeCurrentSong = (song: Obj) => ({
   data: song
 })
 
-const changeLyrics = (timeAndLyricArr: ItimeAndLyricObj[]) => {
-  console.log(timeAndLyricArr);
-  
-  return ({
+const changeLyrics = (timeAndLyricArr: ItimeAndLyricObj[]) => ({
   type: PlayerActionType.CHANGE_LYRICS,
   data: timeAndLyricArr
 })
-}
 
 export const changeSequence = (sequence: Sequence) => ({
   type: PlayerActionType.CHANGE_SEQUENCE,
@@ -144,9 +140,8 @@ export const getLyricAction = (id: number) => {
     try {
       const res = await getLyric(id)
       const timeAndLyricArr = parseLyric(res?.lrc?.lyric)
-      console.log(timeAndLyricArr);
       
-      // dispatch(changeLyrics(timeAndLyricArr))
+      dispatch(changeLyrics(timeAndLyricArr))
     } catch (error) {
       
     }
