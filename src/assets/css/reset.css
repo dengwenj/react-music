@@ -124,8 +124,8 @@ body, textarea, select, input, button {
   left: 50%;
   transform: translateX(-50%);
   bottom: 60px;
-  background-color: rgba(0, 0, 0, .5);
-  color: #fff;
+  background-color: rgba(0, 0, 0, .6);
+  color: #f3f3f3;
 }
 
 span:hover.link {

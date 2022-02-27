@@ -11,7 +11,7 @@ import {
 import getPlaySong from 'utils/getPlaySong'
 
 import { NavLink } from 'react-router-dom'
-import { Slider } from 'antd'
+import { Slider, message } from 'antd'
 import { 
   LeftCircleOutlined, 
   RightCircleOutlined, 
@@ -74,7 +74,6 @@ export default function AppPlayerBar() {
     setIsPlaying(!isPlaying)
   }, [isPlaying])
   const handleTimeUpdate = (e: any) => {
-    // console.log(e.target.currentTime);
     // 没有正在发生变化
     if (!isChanging) {
       setCurrentTime(e.target.currentTime * 1000)
@@ -91,7 +90,16 @@ export default function AppPlayerBar() {
     // 不相等的时候才 dispatch
     if (i1 !== currentLyricIndex) {
       dispatch(changeCurrentLyricIndex(i1))
-      console.log(timeAndLyricArr[i1]) // 不能用 currentLyricIndex 只能用 i1 因为还没有更新
+      // console.log(timeAndLyricArr[i1]) // 不能用 currentLyricIndex 只能用 i1 因为还没有更新
+      // 有歌词才展示，没有歌词还是展示上一句的
+      if (timeAndLyricArr[i1].lyric) {
+        message.open({
+          // type: 'info',  //这里修改了 antd 里面的 类型源码，吧 type 改成可选的，
+          key: 'lyric', // 只会展示一个
+          content: timeAndLyricArr[i1]?.lyric,
+          duration: 0
+        }) 
+      }
     }
   }
   // 滑动条移动的时候
