@@ -23,6 +23,7 @@ import {
   ShareAltOutlined,
   SoundOutlined
 } from  '@ant-design/icons'
+import ShowPlayList from './children-components/show-play-list'
 import { AppPlayerBarWrapper, AppPlayerBarContent } from './styled'
 
 import type { ICombineReducers } from 'store/types'
@@ -34,6 +35,7 @@ export default function AppPlayerBar() {
   const [sliderValue, setSliderValue] = useState(0) // 滑动条滑动
   const [isChanging, setChanging] = useState(false) // 判断正在 change 拖动不
   const [isPlaying, setIsPlaying] = useState(false) // 暂停启动播放 默然是暂停
+  const [isShowPlayList, setIsShowPlayList] = useState(false)
 
   // redux state
   const { 
@@ -144,6 +146,11 @@ export default function AppPlayerBar() {
       dispatch(changeCurrentSongAndCurrentIndex(PrevOrNext.next)) // 随机播放
     }
   }
+  // 播放列表
+  const handlePlayList = () => {
+    // 展示播放列表
+    setIsShowPlayList(!isShowPlayList)
+  }
 
   return (
     <AppPlayerBarWrapper>
@@ -191,12 +198,14 @@ export default function AppPlayerBar() {
               title={sequence === Sequence.cycle ? '循环' : (sequence === Sequence.random ? '随机' : '单曲循环')} 
               onClick={handleSequenceClick}
             />
-            <em title='播放列表'>{playList.length}</em>
+            <em title='播放列表' onClick={handlePlayList}>{playList.length}</em>
           </div>
         </div>
       </AppPlayerBarContent>
       {/* 播放音乐 播放就会一直触发 onTimeUpdate 这个钩子拿到当前的时间，当前的时间也是可以修改的有个 currentTime 属性，修改了当前时间就会播放当前的那个时间段 */}
       <audio ref={audioRef} onTimeUpdate={handleTimeUpdate} onEnded={handleEndMusic} />
+      {/* 点击是否展示播放列表 */}
+      {isShowPlayList && <ShowPlayList />}
     </AppPlayerBarWrapper>
   )
 }

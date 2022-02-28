@@ -20,6 +20,13 @@ export interface IUseSelectorCurrentSongReturn {
   currentLyricIndex: number
 }
 
+export interface IUseSelectorPlayListReturn {
+  playList: Obj[],
+  currentSong: Obj,
+  timeAndLyricArr: ItimeAndLyricObj[],
+  currentLyricIndex: number
+}
+
 export interface IGetState {
   (): ICombineReducers
 }
