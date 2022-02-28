@@ -21,7 +21,8 @@ import {
   MinusSquareOutlined,
   FolderAddOutlined,
   ShareAltOutlined,
-  SoundOutlined
+  SoundOutlined,
+  CloseOutlined
 } from  '@ant-design/icons'
 import ShowPlayList from './children-components/show-play-list'
 import { AppPlayerBarWrapper, AppPlayerBarContent } from './styled'
@@ -35,7 +36,8 @@ export default function AppPlayerBar() {
   const [sliderValue, setSliderValue] = useState(0) // 滑动条滑动
   const [isChanging, setChanging] = useState(false) // 判断正在 change 拖动不
   const [isPlaying, setIsPlaying] = useState(false) // 暂停启动播放 默然是暂停
-  const [isShowPlayList, setIsShowPlayList] = useState(false)
+  const [isShowPlayList, setIsShowPlayList] = useState(false) // 是否显示播放列表
+  const [isShowLyric, setIsShowLyric] = useState(true) // 是否展示当前歌词
 
   // redux state
   const { 
@@ -94,13 +96,17 @@ export default function AppPlayerBar() {
       dispatch(changeCurrentLyricIndex(i1))
       // console.log(timeAndLyricArr[i1]) // 不能用 currentLyricIndex 只能用 i1 因为还没有更新
       // 有歌词才展示，没有歌词还是展示上一句的
-      if (timeAndLyricArr[i1].lyric) {
+      if (timeAndLyricArr[i1].lyric && isShowLyric) {
         message.open({
           // type: 'info',  //这里修改了 antd 里面的 类型源码，吧 type 改成可选的，
           key: 'lyric', // 只会展示一个
           content: timeAndLyricArr[i1]?.lyric,
-          duration: 0
-        }) 
+          duration: 0,
+          icon: <CloseOutlined onClick={() => {
+            message.destroy()
+            setIsShowLyric(false)
+          }} />,
+        })
       }
     }
   }
@@ -151,6 +157,20 @@ export default function AppPlayerBar() {
     // 展示播放列表
     setIsShowPlayList(!isShowPlayList)
   }
+  // 是否展示当前歌词
+  const handleCurrentLyric = () => {
+    setIsShowLyric(true)
+    message.open({
+      // type: 'info',  //这里修改了 antd 里面的 类型源码，吧 type 改成可选的，
+      key: 'lyric', // 只会展示一个
+      content: timeAndLyricArr[currentLyricIndex]?.lyric,
+      duration: 0,
+      icon: <CloseOutlined onClick={() => {
+        message.destroy()
+        setIsShowLyric(false)
+      }} />
+    })
+  }
 
   return (
     <AppPlayerBarWrapper>
@@ -187,7 +207,7 @@ export default function AppPlayerBar() {
         </div>
         <div className='right'>
           <div className='mfs'>
-            <span title='画中画歌词'><MinusSquareOutlined /></span>
+            <span title='当前歌词' onClick={handleCurrentLyric}><MinusSquareOutlined /></span>
             <span title='收藏'><FolderAddOutlined /></span>
             <span title='分享'><ShareAltOutlined /></span>
           </div>
