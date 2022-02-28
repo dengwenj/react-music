@@ -160,16 +160,27 @@ export default function AppPlayerBar() {
   // 是否展示当前歌词
   const handleCurrentLyric = () => {
     setIsShowLyric(true)
-    message.open({
-      // type: 'info',  //这里修改了 antd 里面的 类型源码，吧 type 改成可选的，
-      key: 'lyric', // 只会展示一个
-      content: timeAndLyricArr[currentLyricIndex]?.lyric,
-      duration: 0,
-      icon: <CloseOutlined onClick={() => {
-        message.destroy()
-        setIsShowLyric(false)
-      }} />
-    })
+    if (timeAndLyricArr[currentLyricIndex].lyric) {
+      message.open({
+        key: 'lyric', // 只会展示一个
+        content: timeAndLyricArr[currentLyricIndex]?.lyric,
+        duration: 0,
+        icon: <CloseOutlined onClick={() => {
+          message.destroy()
+          setIsShowLyric(false)
+        }} />,
+      })
+    } else { // 没有歌词展示前一句的
+      message.open({
+        key: 'lyric', // 只会展示一个
+        content: timeAndLyricArr[currentLyricIndex - 1]?.lyric,
+        duration: 0,
+        icon: <CloseOutlined onClick={() => {
+          message.destroy()
+          setIsShowLyric(false)
+        }} />,
+      })
+    }
   }
 
   return (
