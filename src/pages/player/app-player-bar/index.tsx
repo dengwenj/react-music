@@ -39,7 +39,7 @@ export default function AppPlayerBar() {
   const [isShowPlayList, setIsShowPlayList] = useState(false) // 是否显示播放列表
   const [isShowLyric, setIsShowLyric] = useState(true) // 是否展示当前歌词
 
-  // redux state
+  // redux hooks
   const { 
     currentSong,
     sequence,
@@ -207,7 +207,7 @@ export default function AppPlayerBar() {
                 value={sliderValue} 
                 onChange={handleSliderChange}
                 onAfterChange={handleAfterChange}
-                />
+              />
               <div className='time'> 
                 <i>{dayjs(currentTime).format('mm:ss')}</i>
                 <em>/</em>
