@@ -76,6 +76,7 @@ export const ShowPlayListContent = styled.div`
     background-color: #231819;
     height: 100%;
     overflow-y: scroll;
+    padding-bottom: 12px;
     ul {
       li {
         display: flex;
