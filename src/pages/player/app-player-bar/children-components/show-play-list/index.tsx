@@ -10,8 +10,9 @@ import { ShowPlayListWrapper, ShowPlayListTop, ShowPlayListContent } from './sty
 
 import type { ICombineReducers } from 'store/types'
 import type { IUseSelectorPlayListReturn, Obj } from 'pages/player/types'
+import type { IShowPlayListProps } from './types'
 
-export default function ShowPlayList() {
+export default function ShowPlayList({ setIsShowPlayList }: IShowPlayListProps) {
   const { 
     playList, 
     currentSong,
@@ -42,7 +43,7 @@ export default function ShowPlayList() {
     }
   }
   const handleClosure = () => {
-    
+    setIsShowPlayList(false)
   }
 
   return (

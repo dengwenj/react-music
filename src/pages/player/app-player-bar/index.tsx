@@ -205,7 +205,7 @@ export default function AppPlayerBar() {
       {/* 播放音乐 播放就会一直触发 onTimeUpdate 这个钩子拿到当前的时间，当前的时间也是可以修改的有个 currentTime 属性，修改了当前时间就会播放当前的那个时间段 */}
       <audio ref={audioRef} onTimeUpdate={handleTimeUpdate} onEnded={handleEndMusic} />
       {/* 点击是否展示播放列表 */}
-      {isShowPlayList && <ShowPlayList />}
+      {isShowPlayList && <ShowPlayList setIsShowPlayList={setIsShowPlayList} />}
     </AppPlayerBarWrapper>
   )
 }
