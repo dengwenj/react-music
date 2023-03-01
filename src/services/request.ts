@@ -28,13 +28,13 @@ export default function request<T = any>(options: AxiosRequestConfig): Promise<T
       // 响应成功的拦截
       return response.data
     }, (error) => {
-      if (error.response.status === 401) {
+      if (error.response?.status === 401) {
         message.info('未授权的访问请登录')
-      } else if (error.response.status === 404) {
+      } else if (error.response?.status === 404) {
         message.info('没有这个')
-      } else if (error.response.status === 400) {
+      } else if (error.response?.status === 400) {
         message.info('请求错误')
-      } else if (error.response.status >= 500) {
+      } else if (error.response?.status >= 500) {
         message.info('网络异常请稍后重试')
       } else {
         message.info('其他错误')

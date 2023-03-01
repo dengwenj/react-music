@@ -8,8 +8,8 @@ import { TopRankingWrapper, TopRankingHeader, TopRankingContent, TopRankingFoote
 
 import type { ITopRankingProps } from './types'
 
-export default function TopRanking({ item }: ITopRankingProps) {
-  const tracks: any[] = item.tracks?.slice(0, 10) || []
+export default function TopRanking({ item = {} }: ITopRankingProps) {
+  const tracks: any[] = item?.tracks?.slice(0, 10) || []
 
   // redux hook
   const dispatch = useDispatch()
@@ -28,7 +28,7 @@ export default function TopRanking({ item }: ITopRankingProps) {
           <span>
             <i title='播放'><PlayCircleOutlined /></i>
             <em title='收藏'><FolderAddOutlined /></em>
-          </span>          
+          </span>
         </div>
       </TopRankingHeader>
       <TopRankingContent>

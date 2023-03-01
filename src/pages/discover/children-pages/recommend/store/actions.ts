@@ -74,7 +74,7 @@ export const getTopListAction = (idx: number) => {
   return async (dispatch: Dispatch) => {
     switch (idx) {
       // 飙升榜
-      case 3:
+      case 2884035:
         try {
           const res = await getTopList(idx)
           dispatch(upRanking(res))
@@ -83,7 +83,7 @@ export const getTopListAction = (idx: number) => {
         }
         break;
       // 新歌榜
-      case 0:
+      case 19723756:
         try {
           const res = await getTopList(idx)
           dispatch(newRanking(res))
@@ -92,7 +92,7 @@ export const getTopListAction = (idx: number) => {
         }
         break;
       // 原创榜
-      case 2:
+      case 3779629:
         try {
           const res = await getTopList(idx)
           dispatch(originRanking(res))

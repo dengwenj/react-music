@@ -28,7 +28,7 @@ export const getHotRecommends = (limit: number) => {
 export const getNewAlbums = (limit: number) => {
   return request<INewAlbumAPI>({
     method: 'GET',
-    url: '/top/album',
+    url: '/album/new',
     params: {
       limit
     }
@@ -36,12 +36,12 @@ export const getNewAlbums = (limit: number) => {
 }
 
 // 榜单
-export const getTopList = (idx: number) => {
+export const getTopList = (id: number) => {
   return request<ITopListAPI>({
     method: 'GET',
-    url: '/top/list',
+    url: '/playlist/detail',
     params: {
-      idx
+      id
     }
   })
 }
